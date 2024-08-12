@@ -1,3 +1,4 @@
+import { Toast } from "@/services/toast";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -16,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Toast.Provider>
+          {children}
+        </Toast.Provider>
+      </body>
     </html>
   );
 }

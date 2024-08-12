@@ -3,14 +3,24 @@
 import Button from "@/components/Button";
 import { Form, FormDataHandler } from "@/components/Form";
 import { apiService } from "@/services/api";
+import { useToast } from "@/services/toast";
 import React from "react";
 
 const LoginForm: React.FC = () => {
+  const toast = useToast()
+
   const formDataHandler: FormDataHandler = (data) => {
     apiService
       .login({ email: data.email, password: data.password })
-      .then(console.log)
-      .catch(console.error)
+      .then((response) => toast({
+        type: 'success',
+        title: response.feedback
+      }))
+      .catch((error) => toast({
+        type: 'danger',
+        title: 'falha na autenticação',
+        message: error.response.data.feedback
+      }))
   }
 
   return (
