@@ -9,12 +9,14 @@ const service = axios.create({
   withCredentials: true,
 });
 
-export const apiService = {
-  login: async (credentials: Credentials) => {
-    const response = await service.post<LoginResponse>("/login", {
-      ...credentials,
-      application: process.env.NEXT_PUBLIC_APP_ID,
-    });
-    return response.data;
-  },
-};
+export function useApiService() {
+  return {
+    login: async (credentials: Credentials) => {
+      const response = await service.post<LoginResponse>("/login", {
+        ...credentials,
+        application: process.env.NEXT_PUBLIC_APP_ID,
+      });
+      return response.data;
+    },
+  };
+}

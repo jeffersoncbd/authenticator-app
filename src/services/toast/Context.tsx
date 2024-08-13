@@ -33,7 +33,7 @@ const ToastProvider: React.FC<ToastProviderProperties> = ({ children }) => {
 
   useEffect(() => {
     setToasts((toasts) => toasts.filter((toast) => reference - toast.timestamp <= 2000))
-  }, [toasts, reference])
+  }, [reference])
 
   useEffect(() => {
     const timer = setTimeout(() => setReference(new Date().getTime()), 2000)

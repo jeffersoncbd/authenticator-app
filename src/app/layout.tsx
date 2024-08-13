@@ -1,3 +1,5 @@
+import Menu from "@/components/Menu";
+import { Session } from "@/services/session";
 import { Toast } from "@/services/toast";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,7 +21,12 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={inter.className}>
         <Toast.Provider>
-          {children}
+          <Session.Provider>
+            <div className="p-4 h-screen">
+              <Menu />
+              {children}
+            </div>
+          </Session.Provider>
         </Toast.Provider>
       </body>
     </html>
