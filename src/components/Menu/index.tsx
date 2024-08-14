@@ -30,8 +30,8 @@ const Menu: React.FC = () => {
       <MenuContainer
         open={open}
         onNavigate={(path) => {
-          router.push(path)
           setOpen(false)
+          router.push(path)
         }}
         onClose={() => setOpen(false)}
         onLogout={session.logout}

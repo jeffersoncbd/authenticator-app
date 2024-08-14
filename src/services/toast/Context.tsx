@@ -25,18 +25,27 @@ const ToastProvider: React.FC<ToastProviderProperties> = ({ children }) => {
     setToasts(toasts.filter((toast) => toast.id !== id))
   }
   const addToast = (toast: Toast) => {
-    setToasts((prevToasts) => [
-      ...prevToasts,
-      { id: uuidV4(), ...toast, timestamp: new Date().getTime() }
-    ])
+    setToasts((prevToasts) => {
+      const duplicated = prevToasts.find((t) =>
+        t.title === toast.title
+        && t.type === toast.type
+        && t.message === toast.message)
+      if (duplicated === undefined) {
+        return [
+          ...prevToasts,
+          { id: uuidV4(), ...toast, timestamp: new Date().getTime() }
+        ]
+      }
+      return prevToasts
+    })
   }
 
   useEffect(() => {
-    setToasts((toasts) => toasts.filter((toast) => reference - toast.timestamp <= 2000))
+    setToasts((toasts) => toasts.filter((toast) => reference - toast.timestamp <= 5000))
   }, [reference])
 
   useEffect(() => {
-    const timer = setTimeout(() => setReference(new Date().getTime()), 2000)
+    const timer = setTimeout(() => setReference(new Date().getTime()), 5000)
     return () => clearTimeout(timer)
   }, [reference])
 
