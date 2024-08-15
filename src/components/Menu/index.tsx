@@ -20,10 +20,7 @@ const Menu: React.FC = () => {
 
   return (
     <>
-      <Button
-        className='w-[40px] flex justify-center items-center cursor-pointer'
-        onClick={() => setOpen(true)}
-      >
+      <Button iconWidth onClick={() => setOpen(true)}>
         <MenuIcon />
       </Button>
       {open && <MenuOverlay onClick={() => setOpen(false)} />}
