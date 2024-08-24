@@ -2,6 +2,7 @@
 
 import Button from "@/components/Button"
 import { Form, FormDataHandler } from "@/components/Form"
+import PageTransition from "@/components/Transitions/Page"
 import { useApiService } from "@/services/api"
 import { useToast } from "@/services/toast"
 import { Flex, Heading } from "@radix-ui/themes"
@@ -33,21 +34,23 @@ const NewApplication: React.FC = () => {
   }
 
   return (
-    <Flex direction="column" gap="4">
-      <Heading as="h2" align="center">Novo Aplicativo</Heading>
-      <Form.Container formData={formDataHandler}>
-        <Form.Input placeholder="Nome" id="name" required />
+    <PageTransition>
+      <Flex direction="column" gap="4">
+        <Heading as="h2" align="center">Novo Aplicativo</Heading>
+        <Form.Container formData={formDataHandler}>
+          <Form.Input placeholder="Nome" id="name" required />
 
-        <Flex gap="4" mt="4" >
-          <Button color="gray" style={{ width: "calc(50% - 2px)" }} type="button" onClick={() => router.push('/app/applications')} className="mt-2">
-            Cancelar
-          </Button>
-          <Button color="jade" style={{ width: "calc(50% - 2px)" }} type="submit">
-            Salvar
-          </Button>
-        </Flex>
-      </Form.Container>
-    </Flex>
+          <Flex gap="4" mt="4" >
+            <Button color="gray" style={{ width: "calc(50% - 2px)" }} type="button" onClick={() => router.push('/app/applications')} className="mt-2">
+              Cancelar
+            </Button>
+            <Button color="jade" style={{ width: "calc(50% - 2px)" }} type="submit">
+              Salvar
+            </Button>
+          </Flex>
+        </Form.Container>
+      </Flex>
+    </PageTransition>
   )
 }
 

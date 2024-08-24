@@ -26,7 +26,7 @@ export default function RootLayout({
         <Session.Provider>
           <ThemeModeProvider>
             <Toast.Provider>
-              <Box p="4">
+              <Box p="4" height="100vh" width="100vw">
                 <Menu />
                 {children}
               </Box>

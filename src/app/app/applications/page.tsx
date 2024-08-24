@@ -1,6 +1,7 @@
 'use client'
 
 import Button from "@/components/Button"
+import PageTransition from "@/components/Transitions/Page"
 import { useApiService } from "@/services/api"
 import { Application } from "@/services/api/interfaces"
 import { useToast } from "@/services/toast"
@@ -39,26 +40,28 @@ const Applications: React.FC = () => {
   }, [copyId])
 
   return (
-    <Flex direction="column" gap="4">
-      <Heading as="h2" align="center">Aplicativos</Heading>
-      <Flex justify="end">
-        <Button onClick={() => router.push('/app/applications/new')}>
-          <CirclePlus size={20} /> Novo <span />
-        </Button>
-      </Flex>
-      <ul>
-        <Flex direction="column" gap="4">
-          {applications.map((app) => (
-            <Card key={app.id} style={{ cursor: "pointer" }}>
-              <Flex align="center" justify="between">
-                {app.name}
-                <ChevronRight />
-              </Flex>
-            </Card>
-          ))}
+    <PageTransition>
+      <Flex direction="column" gap="4">
+        <Heading as="h2" align="center">Aplicativos</Heading>
+        <Flex justify="end">
+          <Button onClick={() => router.push('/app/applications/new')}>
+            <CirclePlus size={20} /> Novo <span />
+          </Button>
         </Flex>
-      </ul>
-    </Flex>
+        <ul>
+          <Flex direction="column" gap="4">
+            {applications.map((app) => (
+              <Card key={app.id} style={{ cursor: "pointer" }}>
+                <Flex align="center" justify="between">
+                  {app.name}
+                  <ChevronRight />
+                </Flex>
+              </Card>
+            ))}
+          </Flex>
+        </ul>
+      </Flex>
+    </PageTransition>
   )
 }
 
