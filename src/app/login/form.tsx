@@ -6,12 +6,14 @@ import { useApiService } from "@/services/api";
 import { useSession } from "@/services/session";
 import { useToast } from "@/services/toast";
 import { Box, Card, Flex } from "@radix-ui/themes";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const LoginForm: React.FC = () => {
   const toast = useToast()
   const apiService = useApiService()
   const session = useSession()
+  const router = useRouter()
 
   const formDataHandler: FormDataHandler = (data) => {
     apiService
@@ -22,6 +24,7 @@ const LoginForm: React.FC = () => {
           title: response.feedback
         })
         session.login(response.token)
+        router.push('/app/dashboard')
       })
       .catch((error) => {
         console.error(error)

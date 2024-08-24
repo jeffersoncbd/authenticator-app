@@ -30,11 +30,7 @@ const SessionProvider: React.FC<SessionProviderProperties> = ({ children }) => {
   useEffect(
     () => {
       if (token !== undefined) {
-        if (token !== null) { // token is already
-          if (pathname === '/login') {
-            redirect('/app/dashboard')
-          }
-        } else { // token is not
+        if (token === null) {
           if (pathname.startsWith('/app')) {
             redirect('/login')
           }
