@@ -1,7 +1,8 @@
+import { Card, Flex } from "@radix-ui/themes"
 import { X } from "lucide-react"
 import React from "react"
-import { twJoin } from "tailwind-merge"
 import Button from "../Button"
+import ThemeMode from "../ThemeMode"
 import MenuItem from "./Item"
 
 interface MenuContainerProperties {
@@ -17,21 +18,29 @@ const menuItems = [
 ]
 
 const MenuContainer: React.FC<MenuContainerProperties> = (properties) => {
-  const classes = twJoin([
-    'absolute top-0 transition-all duration-200 bg-gray-800',
-    'w-full max-w-[250px] h-screen p-4',
-    'flex flex-col',
-    properties.open ? 'left-0' : '-left-full'
-  ])
-
   return (
-    <div className={classes} onClick={(event) => event.stopPropagation()}>
-      <div className="flex justify-end">
-        <Button className="w-[40px] flex justify-center items-center" onClick={properties.onClose}>
+    <Card
+      onClick={(event) => event.stopPropagation()}
+      style={{
+        position: "absolute",
+        top: "8px",
+        transition: "all 0.2s ease-out",
+        width: "100%",
+        maxWidth: "250px",
+        height: "calc(100vh - 16px)",
+        padding: "8px",
+        display: "flex",
+        flexDirection: "column",
+        left: properties.open ? "8px" : "-100%",
+        zIndex: 9999
+      }}
+    >
+      <Flex justify="end" mb="4">
+        <Button onClick={properties.onClose} iconWidth>
           <X />
         </Button>
-      </div>
-      <ul className="list-none mt-4 flex-1 flex flex-col gap-4">
+      </Flex>
+      <Flex direction="column" gap="4" flexGrow="1">
         {menuItems.map((menuItem) => (
           <MenuItem
             key={menuItem.path}
@@ -40,9 +49,12 @@ const MenuContainer: React.FC<MenuContainerProperties> = (properties) => {
             {menuItem.label}
           </MenuItem>
         ))}
-      </ul>
-      <Button hoverBgVariant="danger" onClick={properties.onLogout}>Logout</Button>
-    </div>
+      </Flex>
+      <Flex justify="center" my="4">
+        <ThemeMode />
+      </Flex>
+      <Button color="crimson" onClick={properties.onLogout}>Logout</Button>
+    </Card>
   )
 }
 

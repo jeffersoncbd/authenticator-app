@@ -1,14 +1,19 @@
-import { X } from "lucide-react"
-import { twMerge } from "tailwind-merge"
+import { Box, Callout, Card, Flex, Heading, Text } from "@radix-ui/themes"
+import { AlertCircle, CircleCheck, CircleX, Info, X } from "lucide-react"
 import { Toast, ToastType } from "./interfaces"
 
+const colorsMap: Record<ToastType, any> = {
+  success: "jade",
+  warning: "amber",
+  danger: "crimson",
+  info: "indigo"
+}
 
-
-const colorsMap: Record<ToastType, string> = {
-  success: "bg-emerald-700",
-  warning: "bg-amber-700",
-  danger: "bg-rose-700",
-  info: "bg-cyan-700"
+const iconsMap: Record<ToastType, any> = {
+  success: <CircleCheck />,
+  warning: <AlertCircle />,
+  danger: <CircleX />,
+  info: <Info />
 }
 
 interface ToastMessageProperties extends Toast {
@@ -17,20 +22,28 @@ interface ToastMessageProperties extends Toast {
 
 const ToastMessage: React.FC<ToastMessageProperties> = (properties) => {
   return (
-    <div className={twMerge(colorsMap[properties.type], 'rounded-md p-2')}>
-      <div className="flex items-center justify-between">
-        <h3 className="font-bold">{properties.title}</h3>
-        <X
-          className="cursor-pointer hover:bg-[#00000030] rounded-sm transition"
-          onClick={properties.onClose}
-        />
-      </div>
-      {properties.message && (
-        <p className="mt-2">
-          {properties.message}
-        </p>
-      )}
-    </div>
+    <Card style={{ padding: "0px" }}>
+      <Callout.Root variant="soft" color={colorsMap[properties.type]} style={{ display: 'flex', alignItems: 'center' }}>
+        <Callout.Icon>
+          {iconsMap[properties.type]}
+        </Callout.Icon>
+        <Box flexGrow="1">
+          <Flex width="100%" justify="between" align="center">
+            <Heading as="h3" size="4">{properties.title}</Heading>
+            <X
+              size="28px"
+              style={{ cursor: 'pointer', backgroundColor: '#00000030', borderRadius: '8px', padding: '4px' }}
+              onClick={properties.onClose}
+            />
+          </Flex>
+          {properties.message && (
+            <Text>
+              {properties.message}
+            </Text>
+          )}
+        </Box>
+      </Callout.Root>
+    </Card>
   )
 }
 

@@ -27,19 +27,22 @@ const SessionProvider: React.FC<SessionProviderProperties> = ({ children }) => {
     setToken(sessionStorage.getItem('token'))
   }, [])
 
-  useEffect(() => {
-    if (token !== undefined) {
-      if (token !== null) { // token is already
-        if (pathname === '/login') {
-          redirect('/app/dashboard')
-        }
-      } else { // token is not
-        if (pathname.startsWith('/app')) {
-          redirect('/login')
+  useEffect(
+    () => {
+      if (token !== undefined) {
+        if (token !== null) { // token is already
+          if (pathname === '/login') {
+            redirect('/app/dashboard')
+          }
+        } else { // token is not
+          if (pathname.startsWith('/app')) {
+            redirect('/login')
+          }
         }
       }
-    }
-  }, [token, pathname])
+    },
+    [token, pathname]
+  )
 
   const login = (token: string) => {
     sessionStorage.setItem('token', token)

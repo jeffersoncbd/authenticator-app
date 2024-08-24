@@ -1,18 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   outline-color: #000000;
   user-select: none;
-}
-
-html {
-  background-color: #111827;
-  color: #fff;
 }
 
 html,

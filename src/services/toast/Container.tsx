@@ -1,3 +1,4 @@
+import { Box, Flex } from "@radix-ui/themes"
 import { IdentifiedToast } from "./interfaces"
 import ToastMessage from "./Message"
 
@@ -7,14 +8,18 @@ interface ToastContainerProperties {
 }
 
 const ToastContainer: React.FC<ToastContainerProperties> = ({ toasts, closeToast }) => {
+  if (toasts.length === 0) {
+    return null
+  }
+
   return (
-    <div className="w-full max-w-[400px] absolute right-0 top-0 p-4 ">
-      <div className="w-full flex flex-col gap-4">
+    <Box width="100%" maxWidth="400px" position="absolute" right="0" top="0" p="2" style={{ zIndex: "99999" }}>
+      <Flex width="100%" direction="column" gap="8">
         {toasts.map((toast) => <ToastMessage
           key={toast.id} {...toast} onClose={() => closeToast(toast.id)}
         />)}
-      </div>
-    </div>
+      </Flex>
+    </Box>
   )
 }
 

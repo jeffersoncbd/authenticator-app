@@ -1,12 +1,23 @@
+import ThemeMode from "@/components/ThemeMode";
+import { Flex, Heading } from "@radix-ui/themes";
+import { Zap } from "lucide-react";
 import LoginForm from "./form";
 
 export default function Login() {
   return (
-    <div className="h-full flex flex-col justify-center items-center gap-6">
-      <p className="text-6xl">🔐</p>
-      <h1 className="text-2xl font-bold">Authenticator</h1>
+    <Flex
+      direction="column"
+      justify="center"
+      align="center"
+      gap="4"
+      height="100vh"
+    >
+      <Zap size="80px" />
+      <Heading as="h1">AuthTor</Heading>
 
       <LoginForm />
-    </div>
+
+      <ThemeMode />
+    </Flex>
   )
 }

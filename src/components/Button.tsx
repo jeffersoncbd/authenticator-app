@@ -1,37 +1,25 @@
-import React, { ButtonHTMLAttributes } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { ButtonProps, Button as RadixButton } from "@radix-ui/themes";
 
-type ButtonTypes = 'success' | 'warning' | 'danger' | 'info'
-
-const hoverBgColorsMap: Record<ButtonTypes, string> = {
-  success: "hover:bg-emerald-600",
-  warning: "hover:bg-amber-600",
-  danger: "hover:bg-rose-600",
-  info: "hover:bg-cyan-600"
-}
-const bgColorsMap: Record<ButtonTypes, string> = {
-  success: "bg-emerald-700",
-  warning: "bg-amber-700",
-  danger: "bg-rose-700",
-  info: "bg-cyan-700"
+interface ButtonProperties extends ButtonProps {
+  iconWidth?: boolean;
+  fullWidth?: boolean
 }
 
-interface ButtonProperties extends ButtonHTMLAttributes<HTMLButtonElement> {
-  bgVariant?: ButtonTypes
-  hoverBgVariant?: ButtonTypes
-  iconWidth?: boolean
-}
-
-const Button: React.FC<ButtonProperties> = ({ className, bgVariant, hoverBgVariant, iconWidth, ...properties }) => {
-  const classes = twMerge(
-    'h-[40px] rounded-lg transition text-[#FFF] font-bold cursor-pointer',
-    bgVariant !== undefined ? bgColorsMap[bgVariant] : 'bg-gray-700',
-    hoverBgColorsMap[hoverBgVariant || 'info'],
-    iconWidth === true ? 'w-[40px] flex justify-center items-center' : 'w-full',
-    className
+const Button: React.FC<ButtonProperties> = ({ iconWidth, fullWidth, ...properties }) => {
+  return (
+    <RadixButton
+      {...properties}
+      size="3"
+      radius="large"
+      variant={iconWidth === true ? "outline" : undefined}
+      style={{
+        cursor: 'pointer',
+        width: iconWidth === true ? '40px' : fullWidth ? '100%' : undefined,
+        padding: iconWidth === true ? '0px' : undefined,
+        ...properties.style
+      }}
+    />
   )
-
-  return <button {...properties} className={classes} />
 }
 
 export default Button

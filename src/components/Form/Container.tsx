@@ -1,15 +1,16 @@
 'use client'
 
-import React, { FormEventHandler, FormHTMLAttributes, useState } from "react";
+import React, { FormEventHandler, useState } from "react";
 import { FormContext } from "./Context";
 import { FormDataHandler, InputChangeHandler } from "./interfaces";
 
 
-interface FormContainerProperties extends FormHTMLAttributes<HTMLFormElement> {
+interface FormContainerProperties {
   formData: FormDataHandler
+  children?: React.ReactNode
 }
 
-const FormContainer: React.FC<FormContainerProperties> = ({ formData, ...properties }) => {
+const FormContainer: React.FC<FormContainerProperties> = ({ formData, children }) => {
   const [form, setForm] = useState({})
 
   const inputChangeHandler: InputChangeHandler = (event) => {
@@ -24,7 +25,7 @@ const FormContainer: React.FC<FormContainerProperties> = ({ formData, ...propert
 
   return (
     <FormContext.Provider value={{ inputChangeHandler }}>
-      <form {...properties} onSubmit={handleSubmit} />
+      <form onSubmit={handleSubmit}>{children}</form>
     </FormContext.Provider>
   )
 }

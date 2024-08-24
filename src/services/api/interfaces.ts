@@ -1,14 +1,21 @@
-export interface Credentials {
+export interface BasicResponse {
+  feedback: string;
+}
+export interface LoginResponse extends BasicResponse {
+  token: string;
+}
+export interface NewApplicationResponse extends BasicResponse {
+  id: string;
+}
+
+export interface LoginCredentials {
   email: string;
   password: string;
 }
-export interface LoginResponse {
-  feedback: string;
-  token: string;
-}
 
-export interface Application {
-  id: string;
+export interface NewApplication {
   name: string;
-  keys: string[];
+}
+export interface Application extends NewApplication {
+  id: string;
 }

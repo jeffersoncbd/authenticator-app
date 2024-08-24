@@ -1,6 +1,9 @@
 import Menu from "@/components/Menu";
 import { Session } from "@/services/session";
+import ThemeModeProvider from "@/services/themeMode";
 import { Toast } from "@/services/toast";
+import { Box } from "@radix-ui/themes";
+import '@radix-ui/themes/styles.css';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -8,7 +11,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Authenticator",
+  title: "AuthTor",
   description: "Manage your applications and their users.",
 };
 
@@ -20,14 +23,16 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <Toast.Provider>
-          <Session.Provider>
-            <div className="p-4 h-screen">
-              <Menu />
-              {children}
-            </div>
-          </Session.Provider>
-        </Toast.Provider>
+        <Session.Provider>
+          <ThemeModeProvider>
+            <Toast.Provider>
+              <Box p="4">
+                <Menu />
+                {children}
+              </Box>
+            </Toast.Provider>
+          </ThemeModeProvider>
+        </Session.Provider>
       </body>
     </html>
   );

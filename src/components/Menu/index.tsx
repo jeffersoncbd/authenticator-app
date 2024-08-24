@@ -1,7 +1,8 @@
 'use client'
 
 import { useSession } from '@/services/session'
-import { Menu as MenuIcon } from 'lucide-react'
+import { Flex, Heading, Separator } from '@radix-ui/themes'
+import { Menu as MenuIcon, Zap } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Button from '../Button'
@@ -20,9 +21,17 @@ const Menu: React.FC = () => {
 
   return (
     <>
-      <Button iconWidth onClick={() => setOpen(true)}>
-        <MenuIcon />
-      </Button>
+      <Flex justify="between" align="center" mb="4">
+        <Button iconWidth onClick={() => setOpen(true)}>
+          <MenuIcon />
+        </Button>
+        <Flex align="center" gap="2">
+          <Heading as="h3" size="4">AuthTor</Heading>
+          <Zap size="28px" />
+        </Flex>
+      </Flex>
+      <Separator mt="3" mb="5" size="4" />
+
       {open && <MenuOverlay onClick={() => setOpen(false)} />}
       <MenuContainer
         open={open}
