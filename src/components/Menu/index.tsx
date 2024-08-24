@@ -30,7 +30,7 @@ const Menu: React.FC = () => {
           <Zap size="28px" />
         </Flex>
       </Flex>
-      <Separator mt="3" mb="5" size="4" />
+      <Separator mt="0px" mb="4" size="4" />
 
       {open && <MenuOverlay onClick={() => setOpen(false)} />}
       <MenuContainer
