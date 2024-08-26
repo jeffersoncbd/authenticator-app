@@ -3,7 +3,8 @@ import {
   Application,
   NewApplication,
   NewApplicationResponse,
-} from "./interfaces";
+} from "../interfaces";
+import { groups } from "./groups";
 
 export function applications(service: AxiosInstance) {
   return {
@@ -22,5 +23,6 @@ export function applications(service: AxiosInstance) {
       );
       return response.data;
     },
+    groups: groups(service),
   };
 }

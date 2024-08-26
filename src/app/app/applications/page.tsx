@@ -5,8 +5,9 @@ import PageTransition from "@/components/Transitions/Page"
 import { useApiService } from "@/services/api"
 import { Application } from "@/services/api/interfaces"
 import { useToast } from "@/services/toast"
-import { Card, Flex, Heading } from "@radix-ui/themes"
+import { Card, Flex, Heading, Text } from "@radix-ui/themes"
 import { ChevronRight, CirclePlus } from "lucide-react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -16,8 +17,6 @@ const Applications: React.FC = () => {
   const toast = useToast()
 
   const [applications, setApplications] = useState<Application[]>([])
-  const [copyId, setCopyId] = useState<null | string>(null)
-  const [open, setOpen] = useState<null | string>(null)
 
   useEffect(() => {
     apiService
@@ -30,14 +29,7 @@ const Applications: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    if (copyId !== null) {
-      void navigator.clipboard.writeText(copyId)
-      setTimeout(() => {
-        setCopyId(null)
-      }, 1000)
-    }
-  }, [copyId])
+
 
   return (
     <PageTransition>
@@ -51,12 +43,14 @@ const Applications: React.FC = () => {
         <ul>
           <Flex direction="column" gap="4">
             {applications.map((app) => (
-              <Card key={app.id} style={{ cursor: "pointer" }}>
-                <Flex align="center" justify="between">
-                  {app.name}
-                  <ChevronRight />
-                </Flex>
-              </Card>
+              <Link key={app.id} href={`/app/applications/${app.id}`} style={{ textDecoration: 'none' }}>
+                <Card style={{ cursor: "pointer" }}>
+                  <Flex align="center" justify="between">
+                    <Text color="gray" highContrast>{app.name}</Text>
+                    <ChevronRight />
+                  </Flex>
+                </Card>
+              </Link>
             ))}
           </Flex>
         </ul>

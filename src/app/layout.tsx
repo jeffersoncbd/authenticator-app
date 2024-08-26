@@ -2,7 +2,7 @@ import Menu from "@/components/Menu";
 import { Session } from "@/services/session";
 import ThemeModeProvider from "@/services/themeMode";
 import { Toast } from "@/services/toast";
-import { Flex } from "@radix-ui/themes";
+import { Box, Flex } from "@radix-ui/themes";
 import '@radix-ui/themes/styles.css';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -33,7 +33,9 @@ export default function RootLayout({
                 direction="column"
               >
                 <Menu />
-                {children}
+                <Box maxWidth="800px" width="100%" mx="auto" style={{ flex: "1" }}>
+                  {children}
+                </Box>
               </Flex>
             </Toast.Provider>
           </ThemeModeProvider>

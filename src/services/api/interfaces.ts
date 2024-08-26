@@ -19,3 +19,9 @@ export interface NewApplication {
 export interface Application extends NewApplication {
   id: string;
 }
+
+export interface Group {
+  id: string;
+  name: string;
+  permissions: Record<string, string>;
+}

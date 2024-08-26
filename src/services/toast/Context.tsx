@@ -17,6 +17,8 @@ interface ToastProviderProperties {
   children: React.ReactNode
 }
 
+const TOAST_DURATION = 3 // in seconds
+
 const ToastProvider: React.FC<ToastProviderProperties> = ({ children }) => {
   const [toasts, setToasts] = useState<IdentifiedToast[]>([])
   const [reference, setReference] = useState(new Date().getTime())
@@ -41,11 +43,11 @@ const ToastProvider: React.FC<ToastProviderProperties> = ({ children }) => {
   }
 
   useEffect(() => {
-    setToasts((toasts) => toasts.filter((toast) => reference - toast.timestamp <= 5000))
+    setToasts((toasts) => toasts.filter((toast) => reference - toast.timestamp <= TOAST_DURATION * 1000))
   }, [reference])
 
   useEffect(() => {
-    const timer = setTimeout(() => setReference(new Date().getTime()), 5000)
+    const timer = setTimeout(() => setReference(new Date().getTime()), TOAST_DURATION * 1000)
     return () => clearTimeout(timer)
   }, [reference])
 

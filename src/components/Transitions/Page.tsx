@@ -12,10 +12,10 @@ const PageTransition: React.FC<PageTransitionProperties> = ({ children }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ flex: "1" }}
+      transition={{ duration: 2 }}
+      style={{ height: "100%" }}
     >
       {children}
-
     </motion.div>
   )
 }

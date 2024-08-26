@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useSession } from "../session";
+import { useToast } from "../toast";
 import { applications } from "./applications";
 import { LoginCredentials, LoginResponse } from "./interfaces";
 
@@ -14,6 +15,7 @@ const service = axios.create({
 
 export function useApiService() {
   const session = useSession();
+  const toast = useToast();
 
   useEffect(() => {
     if (session.token) {
@@ -47,6 +49,20 @@ export function useApiService() {
         application: process.env.NEXT_PUBLIC_APP_ID,
       });
       return response.data;
+    },
+    defaultErrorHandler: (title: string) => {
+      return (error: any) => {
+        if (error.response === undefined) {
+          toast({
+            title: "Ocorreu um erro inesperado",
+            message: error.message,
+            type: "danger",
+          });
+          return;
+        }
+        console.log(`${title}\n${error}`);
+        toast({ title, message: error.response.data.feedback, type: "danger" });
+      };
     },
     applications: applications(service),
   };
