@@ -1,12 +1,13 @@
 'use client'
 
-import Button from "@/components/Button"
 import PageTransition from "@/components/Transitions/Page"
+import { sortByKey } from "@/helpers/sort"
 import { useApiService } from "@/services/api"
 import { Application as ApplicationType, Group } from "@/services/api/interfaces"
-import { Card, Checkbox, Flex, Heading, ScrollArea, Separator, Text, Tooltip } from "@radix-ui/themes"
-import { Check, ChevronRight, Copy, PlusCircle } from "lucide-react"
+import { Card, Checkbox, Flex, Heading, ScrollArea, Separator, Spinner, Text, Tooltip } from "@radix-ui/themes"
+import { Check, ChevronRight, Copy } from "lucide-react"
 import { useEffect, useState } from "react"
+import NewGroupDialog from "./components/NewGroup"
 
 interface ApplicationProperties {
   params: { id: string }
@@ -44,7 +45,9 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
   if (application === undefined) {
     return (
       <PageTransition>
-        <div>Carregando...</div>
+        <Flex height="100%" justify="center" align="center">
+          <Spinner size="3" />
+        </Flex>
       </PageTransition>
     )
   }
@@ -67,15 +70,23 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
 
       <Flex justify="between" align="end" mt="6" mb="4">
         <Heading as="h3" size="4" mb="-1">Grupos de usuários</Heading>
-        <Button color="jade">
-          <PlusCircle />
-          Novo
-        </Button>
+        <NewGroupDialog
+          applicationId={application.id}
+          onSave={(newGroup) =>
+            setGroups((groups) => [...(groups !== undefined ? groups : []), newGroup])
+          }
+        />
       </Flex>
-      <Flex direction="column">
+      <Flex direction="column" gap="2">
         {groups === undefined
-          ? <div>Carregando...</div>
-          : groups.map((group) => (
+          ? (
+            <PageTransition style={{ flex: "1" }}>
+              <Flex height="100%" justify="center" align="center">
+                <Spinner size="3" />
+              </Flex>
+            </PageTransition>
+          )
+          : sortByKey(groups, (item) => item.name).map((group) => (
             <Card
               key={group.id}
               onClick={() => {
