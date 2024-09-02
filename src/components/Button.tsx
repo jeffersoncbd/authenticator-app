@@ -1,15 +1,17 @@
 import { ButtonProps, Button as RadixButton } from "@radix-ui/themes";
+import { Responsive } from "@radix-ui/themes/props";
 
 interface ButtonProperties extends ButtonProps {
   iconWidth?: boolean;
-  fullWidth?: boolean
+  fullWidth?: boolean;
+  size?: Responsive<'1' | '2' | '3' | '4'>
 }
 
-const Button: React.FC<ButtonProperties> = ({ iconWidth, fullWidth, ...properties }) => {
+const Button: React.FC<ButtonProperties> = ({ iconWidth, fullWidth, size, ...properties }) => {
   return (
     <RadixButton
       {...properties}
-      size="3"
+      size={size || '3'}
       radius="large"
       variant={iconWidth === true ? "outline" : undefined}
       style={{
