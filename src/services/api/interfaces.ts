@@ -4,7 +4,7 @@ export interface BasicResponse {
 export interface LoginResponse extends BasicResponse {
   token: string;
 }
-export interface NewApplicationResponse extends BasicResponse {
+export interface BasicCreation extends BasicResponse {
   id: string;
 }
 
@@ -20,8 +20,10 @@ export interface Application extends NewApplication {
   id: string;
 }
 
-export interface Group {
-  id: string;
+export interface NewGroup {
   name: string;
+}
+export interface Group extends NewGroup {
+  id: string;
   permissions: Record<string, string>;
 }

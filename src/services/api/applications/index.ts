@@ -1,9 +1,5 @@
 import { AxiosInstance } from "axios";
-import {
-  Application,
-  NewApplication,
-  NewApplicationResponse,
-} from "../interfaces";
+import { Application, BasicCreation, NewApplication } from "../interfaces";
 import { groups } from "./groups";
 
 export function applications(service: AxiosInstance) {
@@ -17,10 +13,7 @@ export function applications(service: AxiosInstance) {
       return response.data;
     },
     save: async (data: NewApplication) => {
-      const response = await service.post<NewApplicationResponse>(
-        "/applications",
-        data
-      );
+      const response = await service.post<BasicCreation>("/applications", data);
       return response.data;
     },
     groups: groups(service),
