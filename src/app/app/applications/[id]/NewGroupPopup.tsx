@@ -7,12 +7,12 @@ import { Box, Dialog, Flex } from "@radix-ui/themes"
 import { PlusCircle } from "lucide-react"
 import { useRef } from "react"
 
-interface NewGroupDialogProperties {
+interface Properties {
   applicationId: string
   onSave: (newGroup: Group) => void
 }
 
-const NewGroupDialog: React.FC<NewGroupDialogProperties> = (properties) => {
+const NewGroupPopup: React.FC<Properties> = (properties) => {
   const apiService = useApiService()
   const toast = useToast()
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -42,7 +42,7 @@ const NewGroupDialog: React.FC<NewGroupDialogProperties> = (properties) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button size="2">
+        <Button size="1">
           <PlusCircle size={16} />
           Novo
         </Button>
@@ -67,4 +67,4 @@ const NewGroupDialog: React.FC<NewGroupDialogProperties> = (properties) => {
   )
 }
 
-export default NewGroupDialog
+export default NewGroupPopup

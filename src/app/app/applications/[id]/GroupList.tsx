@@ -1,9 +1,11 @@
 import PageTransition from '@/components/Transitions/Page'
 import { sortByKey } from '@/helpers/sort'
 import { Group } from '@/services/api/interfaces'
-import { Card, Checkbox, Flex, Heading, ScrollArea, Separator, Spinner, Tooltip } from '@radix-ui/themes'
+import { Box, Card, Flex, Heading, Separator, Spinner } from '@radix-ui/themes'
 import { ChevronRight } from 'lucide-react'
 import React, { useState } from 'react'
+import NewPermissionPopup from './NewPermissionPopup'
+import PermissionsList from './PermissionsList'
 
 interface Properties {
   groups?: Group[]
@@ -27,7 +29,7 @@ const GroupList: React.FC<Properties> = ({ groups }) => {
       <Card
         key={group.id}
         onClick={() => {
-          if (detailedGroup === undefined) {
+          if (detailedGroup === undefined || detailedGroup !== group.id) {
             setDetailedGroup(group.id)
           } else {
             setDetailedGroup(undefined)
@@ -42,44 +44,25 @@ const GroupList: React.FC<Properties> = ({ groups }) => {
               transition: "transform 0.2s"
             }}
           />
-          <Heading as="h4" size="3" >{group.name}</Heading>
+          <Heading as="h4" size="3">{group.name}</Heading>
         </Flex>
-        <ScrollArea style={{
+
+        <Box style={{
+          overflow: 'hidden',
+          height: '100%',
           maxHeight: detailedGroup === group.id ? "160px" : "0px",
-          paddingRight: "16px",
           transition: "max-height 0.5s"
         }}>
           <Separator size="4" my="2" />
-          <Flex justify="between" mb="2">
-            Permissões:
-            <Flex gap="2">
-              <Tooltip content="Read">
-                <div style={{ width: "16px", textAlign: "center" }}>R</div>
-              </Tooltip>
-              <Tooltip content="Update">
-                <div style={{ width: "16px", textAlign: "center" }}>U</div>
-              </Tooltip>
-              <Tooltip content="Delete">
-                <div style={{ width: "16px", textAlign: "center" }}>D</div>
-              </Tooltip>
-            </Flex>
+
+          <Flex justify="between" align="baseline" mb="2">
+            <Heading as="h5" align="center" size="3">Permissões</Heading>
+            <NewPermissionPopup />
           </Flex>
-          <ul style={{ paddingLeft: "24px" }}>
-            {Object.keys(group.permissions).map((key) => (
-              <li key={key}>
-                <Flex justify="between">
-                  {key}
-                  <Flex gap="2">
-                    {((group.permissions[key] as any) >>> 0).toString(2).split("").reverse()
-                      .map((permission, i) =>
-                        <Checkbox key={i} checked={permission === "1"} />
-                      )}
-                  </Flex>
-                </Flex>
-              </li>
-            ))}
-          </ul>
-        </ScrollArea>
+
+          <PermissionsList permissions={group.permissions} />
+        </Box>
+
       </Card>
     </PageTransition>
   ))

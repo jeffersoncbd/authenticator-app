@@ -25,5 +25,5 @@ export interface NewGroup {
 }
 export interface Group extends NewGroup {
   id: string;
-  permissions: Record<string, string>;
+  permissions: Record<string, number>;
 }

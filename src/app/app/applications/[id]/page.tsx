@@ -7,7 +7,7 @@ import { Flex, Heading, Spinner, Text } from "@radix-ui/themes"
 import { Check, Copy } from "lucide-react"
 import { useEffect, useState } from "react"
 import GroupList from "./GroupList"
-import NewGroupDialog from "./NewGroupDialog"
+import NewGroupDialog from "./NewGroupPopup"
 
 interface ApplicationProperties {
   params: { id: string }
@@ -27,7 +27,7 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
 
     apiService.applications.groups
       .list(properties.params.id)
-      .then(setGroups)
+      .then((setGroups))
       .catch(apiService.defaultErrorHandler('Falha ao listar grupos'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -67,8 +67,8 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
           : <Check size="14px" />}
       </Flex>
 
-      <Flex justify="between" align="end" mt="6" mb="4">
-        <Heading as="h3" size="4" mb="-1">Grupos de usuários</Heading>
+      <Flex justify="between" align="baseline" mb="2">
+        <Heading as="h3" align="center" size="4" mt="5">Grupos de usuários</Heading>
         <NewGroupDialog
           applicationId={application.id}
           onSave={(newGroup) =>
