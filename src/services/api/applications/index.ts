@@ -1,6 +1,7 @@
 import { AxiosInstance } from "axios";
 import { Application, BasicCreation, NewApplication } from "../interfaces";
 import { groups } from "./groups";
+import { users } from "./users";
 
 export function applications(service: AxiosInstance) {
   return {
@@ -17,5 +18,6 @@ export function applications(service: AxiosInstance) {
       return response.data;
     },
     groups: groups(service),
+    users: users(service),
   };
 }

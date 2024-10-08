@@ -32,3 +32,9 @@ export interface Permission {
   key: string;
   permission: number;
 }
+
+export interface User {
+  name: string;
+  email: string;
+  status: "active" | "inactive";
+}

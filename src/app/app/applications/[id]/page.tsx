@@ -2,11 +2,12 @@
 
 import PageTransition from "@/components/Transitions/Page"
 import { useApiService } from "@/services/api"
-import { Application as ApplicationType, Group } from "@/services/api/interfaces"
-import { Flex, Heading, Spinner, Text } from "@radix-ui/themes"
+import { Application as ApplicationType, Group, User } from "@/services/api/interfaces"
+import { Flex, Heading, Spinner, Tabs, Text } from "@radix-ui/themes"
 import { Check, Copy } from "lucide-react"
 import { useEffect, useState } from "react"
 import GroupList from "./GroupList"
+import UsersList from "./UsersList"
 
 interface ApplicationProperties {
   params: { id: string }
@@ -16,6 +17,7 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
   const apiService = useApiService()
   const [application, setApplication] = useState<ApplicationType>()
   const [groups, setGroups] = useState<Group[]>()
+  const [users, setUsers] = useState<User[]>()
   const [copyId, setCopyId] = useState<null | string>(null)
 
   useEffect(() => {
@@ -26,8 +28,14 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
 
     apiService.applications.groups
       .list(properties.params.id)
-      .then((setGroups))
+      .then(setGroups)
       .catch(apiService.defaultErrorHandler('Falha ao listar grupos'))
+
+    apiService.applications.users
+      .list(properties.params.id)
+      .then(setUsers)
+      .catch(apiService.defaultErrorHandler('Falha ao listar usuários'))
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -66,7 +74,20 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
           : <Check size="14px" />}
       </Flex>
 
-      <GroupList groups={groups} applicationId={application.id} />
+      <Tabs.Root defaultValue="groups-list">
+        <Tabs.List>
+          <Tabs.Trigger value="groups-list">Grupos</Tabs.Trigger>
+          <Tabs.Trigger value="users-list">Usuários</Tabs.Trigger>
+        </Tabs.List>
+
+        <Tabs.Content value="groups-list">
+          <GroupList groups={groups} applicationId={application.id} />
+        </Tabs.Content>
+
+        <Tabs.Content value="users-list">
+          <UsersList users={users} applicationId={application.id} />
+        </Tabs.Content>
+      </Tabs.Root>
     </PageTransition>
   )
 }
