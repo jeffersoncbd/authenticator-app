@@ -7,7 +7,6 @@ import { Flex, Heading, Spinner, Text } from "@radix-ui/themes"
 import { Check, Copy } from "lucide-react"
 import { useEffect, useState } from "react"
 import GroupList from "./GroupList"
-import NewGroupDialog from "./NewGroupPopup"
 
 interface ApplicationProperties {
   params: { id: string }
@@ -67,18 +66,7 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
           : <Check size="14px" />}
       </Flex>
 
-      <Flex justify="between" align="baseline" mb="2">
-        <Heading as="h3" align="center" size="4" mt="5">Grupos de usuários</Heading>
-        <NewGroupDialog
-          applicationId={application.id}
-          onSave={(newGroup) =>
-            setGroups((groups) => [...(groups !== undefined ? groups : []), newGroup])
-          }
-        />
-      </Flex>
-      <Flex direction="column" gap="2">
-        <GroupList groups={groups} applicationId={application.id} />
-      </Flex>
+      <GroupList groups={groups} applicationId={application.id} />
     </PageTransition>
   )
 }

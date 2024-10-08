@@ -1,17 +1,21 @@
 import Button from '@/components/Button'
 import { Form, FormDataHandler } from '@/components/Form'
 import { useApiService } from '@/services/api'
+import { useToast } from '@/services/toast'
 import { Box, Dialog, Flex } from '@radix-ui/themes'
 import { PlusCircle } from 'lucide-react'
-import React from 'react'
+import React, { useRef } from 'react'
 
 interface Properties {
   applicationId: string,
-  groupId: string
+  groupId: string,
+  onSave: (key: string, value: number) => void
 }
 
-const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId }) => {
+const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSave }) => {
   const apiService = useApiService()
+  const toast = useToast()
+  const closeRef = useRef<HTMLButtonElement>(null)
 
   const handler: FormDataHandler = (data) => {
 
@@ -28,7 +32,17 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId }) =>
     if (data.delete) {
       newPermission.permission += 4
     }
+
     apiService.applications.groups.permissions.add(applicationId, groupId, newPermission)
+      .then((response) => {
+        toast({
+          type: 'success',
+          title: response.feedback
+        })
+        onSave(newPermission.key, newPermission.permission)
+        closeRef.current?.click()
+      })
+      .catch(apiService.defaultErrorHandler('Falha ao tentar salvar'))
   }
 
   return (
@@ -58,7 +72,7 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId }) =>
             </Flex>
           </Form.Container>
         </Box>
-        <Dialog.Close hidden={true}><div /></Dialog.Close>
+        <Dialog.Close ref={closeRef} hidden={true}><div /></Dialog.Close>
       </Dialog.Content>
     </Dialog.Root>
   )

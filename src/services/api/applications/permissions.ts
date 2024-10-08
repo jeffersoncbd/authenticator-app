@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { Permission } from "../interfaces";
+import { BasicResponse, Permission } from "../interfaces";
 
 export function permissions(service: AxiosInstance) {
   return {
@@ -8,7 +8,7 @@ export function permissions(service: AxiosInstance) {
       groupId: string,
       newPermission: Permission
     ) => {
-      const response = await service.post<void>(
+      const response = await service.post<BasicResponse>(
         `/applications/${applicationId}/groups/${groupId}/permissions`,
         newPermission
       );
