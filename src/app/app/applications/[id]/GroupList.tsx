@@ -9,9 +9,10 @@ import PermissionsList from './PermissionsList'
 
 interface Properties {
   groups?: Group[]
+  applicationId: string
 }
 
-const GroupList: React.FC<Properties> = ({ groups }) => {
+const GroupList: React.FC<Properties> = ({ groups, applicationId }) => {
   const [detailedGroup, setDetailedGroup] = useState<string | undefined>()
 
   if (groups === undefined) {
@@ -50,14 +51,19 @@ const GroupList: React.FC<Properties> = ({ groups }) => {
         <Box style={{
           overflow: 'hidden',
           height: '100%',
-          maxHeight: detailedGroup === group.id ? "160px" : "0px",
-          transition: "max-height 0.5s"
-        }}>
+          maxHeight: detailedGroup === group.id ? "500px" : "0px",
+          transition: "max-height 0.5s",
+          cursor: 'default'
+        }}
+          onClick={(event) => event.stopPropagation()}
+        >
           <Separator size="4" my="2" />
 
           <Flex justify="between" align="baseline" mb="2">
             <Heading as="h5" align="center" size="3">Permissões</Heading>
-            <NewPermissionPopup />
+            {detailedGroup !== undefined && (
+              <NewPermissionPopup applicationId={applicationId} groupId={detailedGroup} />
+            )}
           </Flex>
 
           <PermissionsList permissions={group.permissions} />

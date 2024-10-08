@@ -16,6 +16,7 @@ const FormInput: React.FC<InputProperties> = (properties) => {
       {...properties}
       size="3"
       radius="large"
+      value={formContext.formData[properties.id] !== undefined ? String(formContext.formData[properties.id]) : ''}
       onChange={formContext.inputChangeHandler}
     />
   )

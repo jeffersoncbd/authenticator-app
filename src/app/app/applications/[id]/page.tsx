@@ -77,7 +77,7 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
         />
       </Flex>
       <Flex direction="column" gap="2">
-        <GroupList groups={groups} />
+        <GroupList groups={groups} applicationId={application.id} />
       </Flex>
     </PageTransition>
   )

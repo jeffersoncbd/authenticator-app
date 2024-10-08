@@ -1,5 +1,6 @@
 import { AxiosInstance } from "axios";
 import { BasicCreation, Group, NewGroup } from "../interfaces";
+import { permissions } from "./permissions";
 
 export function groups(service: AxiosInstance) {
   return {
@@ -16,5 +17,6 @@ export function groups(service: AxiosInstance) {
       );
       return response.data;
     },
+    permissions: permissions(service),
   };
 }
