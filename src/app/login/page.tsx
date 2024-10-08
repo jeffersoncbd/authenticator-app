@@ -14,7 +14,7 @@ export default function Login() {
         gap="4"
         height="100%"
       >
-        <Zap size="80px" />
+        <Zap size="80px" stroke="#ffff00" />
         <Heading as="h1">AuthTor</Heading>
 
         <LoginForm />
