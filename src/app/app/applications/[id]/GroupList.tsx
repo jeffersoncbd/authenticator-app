@@ -37,7 +37,7 @@ const GroupList: React.FC<Properties> = (properties) => {
         <NewGroupDialog
           applicationId={properties.applicationId}
           onSave={(newGroup) =>
-            setGroups((groups) => [...(groups !== undefined ? groups : []), newGroup])
+            setGroups([...groups, newGroup])
           }
         />
       </Flex>
@@ -45,7 +45,6 @@ const GroupList: React.FC<Properties> = (properties) => {
         {sortByKey(groups, (item) => item.name).map((group, i) => (
           <PageTransition key={group.id} delay={i / 5}>
             <Card
-              key={group.id}
               onClick={() => {
                 if (detailedGroup === undefined || detailedGroup !== group.id) {
                   setDetailedGroup(group.id)

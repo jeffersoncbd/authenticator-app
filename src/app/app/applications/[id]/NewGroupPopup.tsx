@@ -28,7 +28,6 @@ const NewGroupPopup: React.FC<Properties> = (properties) => {
     apiService
       .applications.groups.save(properties.applicationId, { name: data.name })
       .then((response) => {
-        console.log(response)
         toast({
           type: 'success',
           title: response.feedback
@@ -56,7 +55,7 @@ const NewGroupPopup: React.FC<Properties> = (properties) => {
         <Box mt="4">
           <Form.Container formData={handleSubmit}>
             <Flex direction="column" gap="4">
-              <Form.Input id="name" placeholder="Nome do grupo" />
+              <Form.Input id="name" placeholder="Nome do grupo" required />
               <Button type="submit">Salvar</Button>
             </Flex>
           </Form.Container>

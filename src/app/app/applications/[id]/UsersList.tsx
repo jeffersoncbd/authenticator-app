@@ -3,6 +3,7 @@ import { sortByKey } from '@/helpers/sort'
 import { User } from '@/services/api/interfaces'
 import { Card, Flex, Heading, Spinner } from '@radix-ui/themes'
 import React, { useEffect, useState } from 'react'
+import NewUserPopup from './NewUserPopup'
 
 interface Properties {
   users?: User[]
@@ -30,13 +31,18 @@ const UsersList: React.FC<Properties> = (properties) => {
     <PageTransition>
       <Flex justify="between" align="baseline" mb="2">
         <Heading as="h3" align="center" size="4" mt="5">Usuários da aplicação</Heading>
+        <NewUserPopup
+          applicationId={properties.applicationId}
+          onSave={(user) => setUsers([...users, user])}
+        />
       </Flex>
       <Flex direction="column" gap="2">
         {sortByKey(users, (item) => item.name).map((user, i) => (
           <PageTransition key={user.email} delay={i / 5}>
             <Card>
-              <Flex justify="between" align="center">
-                <Heading as="h4" size="3">{user.name}</Heading>
+              <Heading as="h4" size="3">{user.name} - {user.email}</Heading>
+              <Flex justify="between" align="end">
+                {user.group}
                 <div style={{
                   height: '16px',
                   width: '16px',
@@ -44,7 +50,6 @@ const UsersList: React.FC<Properties> = (properties) => {
                   borderRadius: '50%'
                 }} />
               </Flex>
-              {user.email}
             </Card>
           </PageTransition>
         ))}

@@ -23,7 +23,7 @@ const PermissionsList: React.FC<Properties> = (properties) => {
           applicationId={properties.applicationId}
           groupId={properties.groupId}
           onSave={(key, value) => {
-            setPermissions((permissions) => ({ ...permissions, [key]: value }))
+            setPermissions({ ...permissions, [key]: value })
           }}
         />
       </Flex>

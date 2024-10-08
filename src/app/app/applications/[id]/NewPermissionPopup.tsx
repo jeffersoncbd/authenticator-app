@@ -18,7 +18,6 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSa
   const closeRef = useRef<HTMLButtonElement>(null)
 
   const handler: FormDataHandler = (data) => {
-
     const newPermission = {
       key: data.key,
       permission: 0
@@ -31,6 +30,13 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSa
     }
     if (data.delete) {
       newPermission.permission += 4
+    }
+    if (newPermission.permission === 0) {
+      toast({
+        type: 'danger',
+        title: 'Adicione pelomenos uma permissão'
+      })
+      return
     }
 
     apiService.applications.groups.permissions.add(applicationId, groupId, newPermission)
@@ -57,12 +63,12 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSa
       <Dialog.Content>
         <Dialog.Title>Adicionar Permissão</Dialog.Title>
         <Dialog.Description style={{ textAlign: 'justify' }}>
-          utilize nomes descritivos que reflitam claramente a funcionalidade da chave, como por exemplo &quot;usuarios&quot;, &quot;empresas&quot; ou &quot;dashboard&quot;.
+          Utilize nomes descritivos que reflitam claramente a funcionalidade da chave, como por exemplo &quot;usuarios&quot;, &quot;empresas&quot; ou &quot;dashboard&quot;.
         </Dialog.Description>
         <Box mt="4">
           <Form.Container formData={handler}>
             <Flex direction="column" gap="4">
-              <Form.Input id="key" placeholder="Chave" />
+              <Form.Input id="key" placeholder="Chave" required />
               <Flex justify="between">
                 <Form.Checkbox id="read" label="Leitura" />
                 <Form.Checkbox id="write" label="Escrita" />

@@ -33,8 +33,15 @@ export interface Permission {
   permission: number;
 }
 
+export interface NewUser {
+  name: string;
+  email: string;
+  password: string;
+  groupId: string;
+}
 export interface User {
   name: string;
   email: string;
   status: "active" | "inactive";
+  group: string;
 }
