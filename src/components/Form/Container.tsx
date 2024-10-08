@@ -2,7 +2,7 @@
 
 import React, { FormEventHandler, useState } from "react";
 import { FormContext } from "./Context";
-import { CheckboxChangeHandler, FormDataHandler, InputChangeHandler } from "./interfaces";
+import { CustomChangeHandler, FormDataHandler, InputChangeHandler } from "./interfaces";
 
 
 interface FormContainerProperties {
@@ -17,7 +17,7 @@ const FormContainer: React.FC<FormContainerProperties> = ({ formData, children }
     const { id, value } = event.target
     setForm({ ...form, [id]: value })
   }
-  const checkboxChangeHandler: CheckboxChangeHandler = (event) => {
+  const customChangeHandler: CustomChangeHandler = (event) => {
     const { id, value } = event
     setForm({ ...form, [id]: value })
   }
@@ -28,7 +28,7 @@ const FormContainer: React.FC<FormContainerProperties> = ({ formData, children }
   }
 
   return (
-    <FormContext.Provider value={{ formData: form, inputChangeHandler, checkboxChangeHandler }}>
+    <FormContext.Provider value={{ formData: form, inputChangeHandler, customChangeHandler }}>
       <form onSubmit={handleSubmit}>{children}</form>
     </FormContext.Provider>
   )

@@ -1,8 +1,10 @@
 import { ChangeEventHandler } from "react";
 
-export type InputChangeHandler = ChangeEventHandler<HTMLInputElement>;
-export type CheckboxChangeHandler = (event: {
+interface Event {
   id: string;
-  value: boolean;
-}) => void;
+  value: string | boolean;
+}
+
+export type InputChangeHandler = ChangeEventHandler<HTMLInputElement>;
+export type CustomChangeHandler = (event: Event) => void;
 export type FormDataHandler = (form: Record<string, string>) => void;

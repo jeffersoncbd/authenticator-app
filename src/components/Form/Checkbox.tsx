@@ -20,7 +20,7 @@ const FormCheckbox: React.FC<Properties> = ({ label, direction, ...properties })
         {...properties}
         checked={formContext.formData[properties.id] as boolean}
         onCheckedChange={(value) => {
-          formContext.checkboxChangeHandler({ id: properties.id, value: value === true })
+          formContext.customChangeHandler({ id: properties.id, value: value === true })
         }}
       />
       {label}
