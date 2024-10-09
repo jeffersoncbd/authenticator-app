@@ -1,6 +1,6 @@
 import { Card, Checkbox, Flex, Heading, ScrollArea, Tooltip } from '@radix-ui/themes'
 import React, { useEffect, useState } from 'react'
-import NewPermissionPopup from './NewPermissionPopup'
+import NewPermissionPopup from './New'
 
 interface Properties {
   applicationId: string

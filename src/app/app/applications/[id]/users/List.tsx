@@ -3,7 +3,7 @@ import { sortByKey } from '@/helpers/sort'
 import { User } from '@/services/api/interfaces'
 import { Card, Flex, Heading, Spinner } from '@radix-ui/themes'
 import React, { useEffect, useState } from 'react'
-import NewUserPopup from './NewUserPopup'
+import NewUserPopup from './New'
 
 interface Properties {
   users?: User[]

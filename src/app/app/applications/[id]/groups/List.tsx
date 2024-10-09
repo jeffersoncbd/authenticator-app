@@ -4,15 +4,15 @@ import { Group } from '@/services/api/interfaces'
 import { Box, Card, Flex, Heading, Separator, Spinner } from '@radix-ui/themes'
 import { ChevronRight } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import NewGroupDialog from './NewGroupPopup'
-import PermissionsList from './PermissionsList'
+import PermissionsList from '../permissions/List'
+import NewGroupDialog from './New'
 
 interface Properties {
   groups?: Group[]
   applicationId: string
 }
 
-const GroupList: React.FC<Properties> = (properties) => {
+const GroupsList: React.FC<Properties> = (properties) => {
   const [groups, setGroups] = useState(properties.groups)
   const [detailedGroup, setDetailedGroup] = useState<string | undefined>()
 
@@ -88,4 +88,4 @@ const GroupList: React.FC<Properties> = (properties) => {
   )
 }
 
-export default GroupList
+export default GroupsList

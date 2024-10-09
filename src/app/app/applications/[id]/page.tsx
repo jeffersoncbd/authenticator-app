@@ -6,8 +6,8 @@ import { Application as ApplicationType, Group, User } from "@/services/api/inte
 import { Flex, Heading, Spinner, Tabs, Text } from "@radix-ui/themes"
 import { Check, Copy } from "lucide-react"
 import { useEffect, useState } from "react"
-import GroupList from "./GroupList"
-import UsersList from "./UsersList"
+import GroupsList from "./groups/List"
+import UsersList from "./users/List"
 
 interface ApplicationProperties {
   params: { id: string }
@@ -81,7 +81,7 @@ const Application: React.FC<ApplicationProperties> = (properties) => {
         </Tabs.List>
 
         <Tabs.Content value="groups-list">
-          <GroupList groups={groups} applicationId={application.id} />
+          <GroupsList groups={groups} applicationId={application.id} />
         </Tabs.Content>
 
         <Tabs.Content value="users-list">
