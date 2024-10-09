@@ -27,7 +27,7 @@ const Menu: React.FC = () => {
         </Button>
         <Flex align="center" gap="2">
           <Heading as="h3" size="4">AuthTor</Heading>
-          <Zap size="28px" />
+          <Zap size="28px" stroke="#ffff00" />
         </Flex>
       </Flex>
       <Separator mt="0px" mb="4" size="4" />
