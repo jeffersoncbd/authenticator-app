@@ -6,12 +6,13 @@ import { CustomChangeHandler, InputChangeHandler, SubmitDataHandler } from "./in
 
 
 interface FormContainerProperties {
+  initialValues?: Record<string, string | boolean>
   onSubmitData: SubmitDataHandler
   children?: React.ReactNode
 }
 
-const FormContainer: React.FC<FormContainerProperties> = ({ onSubmitData, children }) => {
-  const [form, setForm] = useState({})
+const FormContainer: React.FC<FormContainerProperties> = ({ initialValues, onSubmitData, children }) => {
+  const [form, setForm] = useState(initialValues || {})
 
   const inputChangeHandler: InputChangeHandler = (event) => {
     const { id, value } = event.target

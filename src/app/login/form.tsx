@@ -18,7 +18,7 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit: SubmitDataHandler = (data) => {
     apiService
-      .login({ email: data.email, password: data.password })
+      .login({ email: data.email as string, password: data.password as string })
       .then((response) => {
         toast({
           type: 'success',

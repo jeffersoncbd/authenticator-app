@@ -45,8 +45,8 @@ const NewUserPopup: React.FC<Properties> = (properties) => {
           title: response.feedback
         })
         properties.onSave({
-          name: data.name,
-          email: data.email,
+          name: data.name as string,
+          email: data.email as string,
           status: 'active',
           group: groups?.find((group) => group.id === data.groupId)?.name || ''
         })

@@ -27,13 +27,13 @@ const NewGroupPopup: React.FC<Properties> = (properties) => {
       return
     }
     apiService
-      .applications.groups.save(properties.applicationId, { name: data.name })
+      .applications.groups.save(properties.applicationId, { name: data.name as string })
       .then((response) => {
         toast({
           type: 'success',
           title: response.feedback
         })
-        properties.onSave({ id: response.id, name: data.name, permissions: {} })
+        properties.onSave({ id: response.id, name: data.name as string, permissions: {} })
         closeRef.current?.click()
       })
       .catch(apiService.defaultErrorHandler('Falha ao tentar salvar'))

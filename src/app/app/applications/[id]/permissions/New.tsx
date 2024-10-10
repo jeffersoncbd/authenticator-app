@@ -20,7 +20,7 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSa
 
   const handleSubmit: SubmitDataHandler = (data) => {
     const newPermission = {
-      key: data.key,
+      key: data.key as string,
       permission: 0
     }
     if (data.read) {
