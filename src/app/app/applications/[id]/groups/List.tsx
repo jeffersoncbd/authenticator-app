@@ -32,7 +32,7 @@ const GroupsList: React.FC<Properties> = (properties) => {
 
   return (
     <PageTransition>
-      <Flex justify="between" align="baseline" mb="2">
+      <Flex justify="between" align="end" mb="2">
         <Heading as="h3" align="center" size="4" mt="5">Grupos de permissões</Heading>
         <NewGroupDialog
           applicationId={properties.applicationId}

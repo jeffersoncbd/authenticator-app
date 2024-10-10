@@ -1,8 +1,9 @@
+import Button from '@/components/Button'
 import { Form, FormDataHandler } from '@/components/Form'
 import { useApiService } from '@/services/api'
 import { Group, NewUser, User } from '@/services/api/interfaces'
 import { useToast } from '@/services/toast'
-import { Box, Button, Dialog, Flex } from '@radix-ui/themes'
+import { Box, Dialog, Flex } from '@radix-ui/themes'
 import { PlusCircle } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -56,7 +57,7 @@ const NewUserPopup: React.FC<Properties> = (properties) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button size="1" style={{ cursor: 'pointer' }}>
+        <Button size="2">
           <PlusCircle size={16} />
           Novo
         </Button>

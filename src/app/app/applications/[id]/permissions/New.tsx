@@ -54,7 +54,7 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSa
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button size="1" onClick={(event) => event.stopPropagation()}>
+        <Button size="2">
           <PlusCircle size={12} />
           Adicionar
         </Button>

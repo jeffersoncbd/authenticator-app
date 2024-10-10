@@ -41,7 +41,7 @@ const NewGroupPopup: React.FC<Properties> = (properties) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button size="1">
+        <Button size="2">
           <PlusCircle size={16} />
           Novo
         </Button>

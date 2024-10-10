@@ -1,3 +1,4 @@
+import Button from '@/components/Button'
 import PageTransition from '@/components/Transitions/Page'
 import { sortByKey } from '@/helpers/sort'
 import { User, UserStatus } from '@/services/api/interfaces'
@@ -40,7 +41,7 @@ const UsersList: React.FC<Properties> = (properties) => {
 
   return (
     <PageTransition>
-      <Flex justify="between" align="baseline" mb="2">
+      <Flex justify="between" align="end" mb="2">
         <Heading as="h3" align="center" size="4" mt="5">Usuários da aplicação</Heading>
         <NewUserPopup
           applicationId={properties.applicationId}
@@ -51,12 +52,18 @@ const UsersList: React.FC<Properties> = (properties) => {
         {sortByKey(users, (item) => item.name).map((user, i) => (
           <PageTransition key={user.email} delay={i / 5}>
             <Card>
-              <Heading as="h4" size="3">{user.name} - {user.email}</Heading>
-              <Flex justify="between" align="end">
-                Grupo: {user.group}
+              <Flex justify="between" align="start">
+                <Heading as="h4" size="3">
+                  {user.email}
+                </Heading>
                 <Badge color={statusColor[user.status]}>
                   {statusLabels[user.status]}
                 </Badge>
+              </Flex>
+              <Flex justify="between" align="end">
+                Nome: {user.name}<br />
+                Grupo: {user.group}
+                <Button size="2">Editar</Button>
               </Flex>
             </Card>
           </PageTransition>

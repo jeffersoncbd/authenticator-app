@@ -17,7 +17,7 @@ const PermissionsList: React.FC<Properties> = (properties) => {
 
   return (
     <>
-      <Flex justify="between" align="baseline" mb="2">
+      <Flex justify="between" align="end" mb="2">
         <Heading as="h5" align="center" size="3">Permissões</Heading>
         <NewPermissionPopup
           applicationId={properties.applicationId}
