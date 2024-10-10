@@ -13,11 +13,11 @@ const FormInput: React.FC<InputProperties> = (properties) => {
 
   return (
     <TextField.Root
-      {...properties}
       size="3"
       radius="large"
       value={formContext.formData[properties.id] !== undefined ? String(formContext.formData[properties.id]) : ''}
       onChange={formContext.inputChangeHandler}
+      {...properties}
     />
   )
 }

@@ -17,11 +17,11 @@ const FormCheckbox: React.FC<Properties> = ({ label, direction, ...properties })
   return (
     <Flex align="center" gap="2" direction={direction}>
       <Checkbox
-        {...properties}
         checked={formContext.formData[properties.id] as boolean}
         onCheckedChange={(value) => {
           formContext.customChangeHandler({ id: properties.id, value: value === true })
         }}
+        {...properties}
       />
       {label}
     </Flex>
