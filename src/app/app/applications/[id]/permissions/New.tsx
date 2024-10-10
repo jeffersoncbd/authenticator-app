@@ -1,5 +1,6 @@
 import Button from '@/components/Button'
-import { Form, FormDataHandler } from '@/components/Form'
+import { Form } from '@/components/Form'
+import { SubmitDataHandler } from '@/components/Form/interfaces'
 import { useApiService } from '@/services/api'
 import { useToast } from '@/services/toast'
 import { Box, Dialog, Flex } from '@radix-ui/themes'
@@ -17,7 +18,7 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSa
   const toast = useToast()
   const closeRef = useRef<HTMLButtonElement>(null)
 
-  const handler: FormDataHandler = (data) => {
+  const handleSubmit: SubmitDataHandler = (data) => {
     const newPermission = {
       key: data.key,
       permission: 0
@@ -66,7 +67,7 @@ const NewPermissionPopup: React.FC<Properties> = ({ applicationId, groupId, onSa
           Utilize nomes descritivos que reflitam claramente a funcionalidade da chave, como por exemplo &quot;usuarios&quot;, &quot;empresas&quot; ou &quot;dashboard&quot;.
         </Dialog.Description>
         <Box mt="4">
-          <Form.Container formData={handler}>
+          <Form.Container onSubmitData={handleSubmit}>
             <Flex direction="column" gap="4">
               <Form.Input id="key" placeholder="Chave" required />
               <Flex justify="between">

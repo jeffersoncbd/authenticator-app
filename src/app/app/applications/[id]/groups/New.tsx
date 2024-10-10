@@ -1,5 +1,6 @@
 import Button from "@/components/Button"
-import { Form, FormDataHandler } from "@/components/Form"
+import { Form } from "@/components/Form"
+import { SubmitDataHandler } from "@/components/Form/interfaces"
 import { useApiService } from "@/services/api"
 import { Group } from "@/services/api/interfaces"
 import { useToast } from "@/services/toast"
@@ -17,7 +18,7 @@ const NewGroupPopup: React.FC<Properties> = (properties) => {
   const toast = useToast()
   const closeRef = useRef<HTMLButtonElement>(null)
 
-  const handleSubmit: FormDataHandler = (data) => {
+  const handleSubmit: SubmitDataHandler = (data) => {
     if (closeRef.current === null) {
       toast({
         type: 'danger',
@@ -53,7 +54,7 @@ const NewGroupPopup: React.FC<Properties> = (properties) => {
           Crie um novo grupo de permissões para esta aplicação.
         </Dialog.Description>
         <Box mt="4">
-          <Form.Container formData={handleSubmit}>
+          <Form.Container onSubmitData={handleSubmit}>
             <Flex direction="column" gap="4">
               <Form.Input id="name" placeholder="Nome do grupo" required />
               <Button type="submit">Salvar</Button>

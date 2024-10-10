@@ -2,15 +2,15 @@
 
 import React, { FormEventHandler, useState } from "react";
 import { FormContext } from "./Context";
-import { CustomChangeHandler, FormDataHandler, InputChangeHandler } from "./interfaces";
+import { CustomChangeHandler, InputChangeHandler, SubmitDataHandler } from "./interfaces";
 
 
 interface FormContainerProperties {
-  formData: FormDataHandler
+  onSubmitData: SubmitDataHandler
   children?: React.ReactNode
 }
 
-const FormContainer: React.FC<FormContainerProperties> = ({ formData, children }) => {
+const FormContainer: React.FC<FormContainerProperties> = ({ onSubmitData, children }) => {
   const [form, setForm] = useState({})
 
   const inputChangeHandler: InputChangeHandler = (event) => {
@@ -24,7 +24,7 @@ const FormContainer: React.FC<FormContainerProperties> = ({ formData, children }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
-    formData(form)
+    onSubmitData(form)
   }
 
   return (

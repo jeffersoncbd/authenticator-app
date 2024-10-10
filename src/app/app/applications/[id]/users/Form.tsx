@@ -1,17 +1,18 @@
 import Button from '@/components/Button'
-import { Form, FormDataHandler } from '@/components/Form'
+import { Form } from '@/components/Form'
+import { SubmitDataHandler } from '@/components/Form/interfaces'
 import { Group } from '@/services/api/interfaces'
 import { Flex } from '@radix-ui/themes'
 import React from 'react'
 
 interface Properties {
-  handleSubmit: FormDataHandler
+  onSubmitData: SubmitDataHandler
   groups: Group[]
 }
 
 const UserForm: React.FC<Properties> = (properties) => {
   return (
-    <Form.Container formData={properties.handleSubmit}>
+    <Form.Container onSubmitData={properties.onSubmitData}>
       <Flex direction="column" gap="4">
         <Form.Input id="name" placeholder="Nome do usuário" required />
         <Form.Input id="email" type="email" placeholder="Email do usuário" required />

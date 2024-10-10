@@ -7,4 +7,4 @@ interface Event {
 
 export type InputChangeHandler = ChangeEventHandler<HTMLInputElement>;
 export type CustomChangeHandler = (event: Event) => void;
-export type FormDataHandler = (form: Record<string, string>) => void;
+export type SubmitDataHandler = (form: Record<string, string>) => void;

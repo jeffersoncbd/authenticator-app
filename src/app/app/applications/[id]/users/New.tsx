@@ -1,5 +1,5 @@
 import Button from '@/components/Button'
-import { FormDataHandler } from '@/components/Form'
+import { SubmitDataHandler } from '@/components/Form/interfaces'
 import { useApiService } from '@/services/api'
 import { Group, NewUser, User } from '@/services/api/interfaces'
 import { useToast } from '@/services/toast'
@@ -29,7 +29,7 @@ const NewUserPopup: React.FC<Properties> = (properties) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleSubmit: FormDataHandler = (data) => {
+  const handleSubmit: SubmitDataHandler = (data) => {
     if (closeRef.current === null) {
       toast({
         type: 'danger',
@@ -70,7 +70,7 @@ const NewUserPopup: React.FC<Properties> = (properties) => {
           Adicione um usuário na aplicação selecionando um grupo de permissões.
         </Dialog.Description>
         <Box mt="4">
-          <UserForm handleSubmit={handleSubmit} groups={groups || []} />
+          <UserForm onSubmitData={handleSubmit} groups={groups || []} />
         </Box>
         <Dialog.Close ref={closeRef} hidden={true}><div /></Dialog.Close>
       </Dialog.Content>
