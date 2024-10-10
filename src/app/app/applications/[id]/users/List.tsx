@@ -1,13 +1,24 @@
 import PageTransition from '@/components/Transitions/Page'
 import { sortByKey } from '@/helpers/sort'
-import { User } from '@/services/api/interfaces'
-import { Card, Flex, Heading, Spinner } from '@radix-ui/themes'
+import { User, UserStatus } from '@/services/api/interfaces'
+import { Badge, Card, Flex, Heading, Spinner } from '@radix-ui/themes'
+import { badgePropDefs } from '@radix-ui/themes/props'
 import React, { useEffect, useState } from 'react'
 import NewUserPopup from './New'
 
 interface Properties {
   users?: User[]
   applicationId: string
+}
+
+const statusLabels: Record<UserStatus, string> = {
+  active: 'Ativo',
+  inactive: 'Inativo'
+}
+const colors = badgePropDefs.color.values
+const statusColor: Record<UserStatus, typeof colors[number]> = {
+  active: 'green',
+  inactive: 'gray'
 }
 
 const UsersList: React.FC<Properties> = (properties) => {
@@ -42,13 +53,10 @@ const UsersList: React.FC<Properties> = (properties) => {
             <Card>
               <Heading as="h4" size="3">{user.name} - {user.email}</Heading>
               <Flex justify="between" align="end">
-                {user.group}
-                <div style={{
-                  height: '16px',
-                  width: '16px',
-                  backgroundColor: user.status === 'active' ? 'limegreen' : 'gray',
-                  borderRadius: '50%'
-                }} />
+                Grupo: {user.group}
+                <Badge color={statusColor[user.status]}>
+                  {statusLabels[user.status]}
+                </Badge>
               </Flex>
             </Card>
           </PageTransition>

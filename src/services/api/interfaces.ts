@@ -39,9 +39,10 @@ export interface NewUser {
   password: string;
   groupId: string;
 }
+export type UserStatus = "active" | "inactive";
 export interface User {
   name: string;
   email: string;
-  status: "active" | "inactive";
+  status: UserStatus;
   group: string;
 }
