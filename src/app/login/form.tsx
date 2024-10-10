@@ -1,7 +1,8 @@
 'use client'
 
 import Button from "@/components/Button";
-import { Form, FormDataHandler } from "@/components/Form";
+import { Form } from "@/components/Form";
+import { SubmitDataHandler } from "@/components/Form/interfaces";
 import { useApiService } from "@/services/api";
 import { useSession } from "@/services/session";
 import { useToast } from "@/services/toast";
@@ -15,7 +16,7 @@ const LoginForm: React.FC = () => {
   const session = useSession()
   const router = useRouter()
 
-  const formDataHandler: FormDataHandler = (data) => {
+  const handleSubmit: SubmitDataHandler = (data) => {
     apiService
       .login({ email: data.email, password: data.password })
       .then((response) => {
@@ -48,7 +49,7 @@ const LoginForm: React.FC = () => {
   return (
     <Box maxWidth="400px" width="100%">
       <Card size="3">
-        <Form.Container formData={formDataHandler}>
+        <Form.Container onSubmitData={handleSubmit}>
           <Flex direction="column" gap="4">
             <Form.Input placeholder="E-mail" id="email" type="email" required />
             <Form.Input placeholder="Password" id="password" type="password" minLength={8} required />
